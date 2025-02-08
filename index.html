@@ -13,32 +13,15 @@
             <label for="receita">Valor Recebido (R$):</label>
             <input type="number" id="receita" placeholder="Digite o valor recebido">
         </div>
-        <div>
+        <div id="gastos-container">
             <h3>Gastos:</h3>
-            <label for="aluguel">Aluguel (R$):</label>
-            <input type="number" id="aluguel" placeholder="Digite o valor do aluguel">
-            
-            <label for="luz">Luz (R$):</label>
-            <input type="number" id="luz" placeholder="Digite o valor da luz">
-            
-            <label for="agua">Água (R$):</label>
-            <input type="number" id="agua" placeholder="Digite o valor da água">
-            
-            <label for="supermercado">Supermercado (R$):</label>
-            <input type="number" id="supermercado" placeholder="Digite o valor do supermercado">
-            
-            <label for="transporte">Transporte (R$):</label>
-            <input type="number" id="transporte" placeholder="Digite o valor do transporte">
-            
-            <label for="internet">Internet (R$):</label>
-            <input type="number" id="internet" placeholder="Digite o valor da internet">
-            
-            <label for="outros">Outros (R$):</label>
-            <input type="number" id="outros" placeholder="Digite outros gastos">
         </div>
+        <button id="add-gasto">+ Adicionar Gasto</button>
         <button onclick="calcular()">Calcular</button>
         <h3>Sobra no Final (R$): <span id="sobra">0</span></h3>
+        <button id="download" onclick="downloadExtrato()" style="display:none;">Download</button>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
