@@ -64,3 +64,11 @@ span {
     font-weight: bold;
     color: #ff5733;
 }
+
+#add-gasto {
+    background-color: #2196F3;
+}
+
+#add-gasto:hover {
+    background-color: #1e88e5;
+}
