@@ -46,7 +46,10 @@ function calcular() {
 
     // Calculando a sobra
     const sobra = receita - totalGastos;
-    document.getElementById('sobra').innerText = sobra.toFixed(2);
+    
+    // Atualizando os valores na página
+    document.getElementById('sobra').innerText = sobra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('receita').value = receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
     // Exibindo o botão de download
     document.getElementById('download').style.display = 'block';
@@ -55,15 +58,23 @@ function calcular() {
 // Função para gerar o extrato e fazer o download
 function downloadExtrato() {
     let extrato = 'Extrato de Gastos:\n\n';
-    extrato += 'Valor Recebido: R$ ' + (parseFloat(document.getElementById('receita').value) || 0) + '\n\n';
+    const receita = parseFloat(document.getElementById('receita').value) || 0;
+
+    // Adicionando valor recebido no extrato
+    extrato += 'Valor Recebido: ' + receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '\n\n';
     extrato += 'Gastos:\n';
 
+    // Adicionando os gastos no extrato
     gastos.forEach(gasto => {
-        extrato += gasto.nome.value + ': R$ ' + (parseFloat(gasto.valor.value) || 0) + '\n';
+        extrato += gasto.nome.value + ': ' + parseFloat(gasto.valor.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '\n';
     });
 
-    const sobra = parseFloat(document.getElementById('sobra').innerText);
-    extrato += '\nSobra no Final: R$ ' + sobra.toFixed(2);
+    // Calculando a sobra novamente
+    const totalGastos = gastos.reduce((total, gasto) => total + (parseFloat(gasto.valor.value) || 0), 0);
+    const sobra = receita - totalGastos;
+
+    // Adicionando a sobra no extrato
+    extrato += '\nSobra no Final: ' + sobra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
     // Criando um Blob com o conteúdo do extrato
     const blob = new Blob([extrato], { type: 'text/plain' });
@@ -72,3 +83,4 @@ function downloadExtrato() {
     link.download = 'extrato_de_gastos.txt';
     link.click();
 }
+
