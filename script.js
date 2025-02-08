@@ -60,21 +60,21 @@ function downloadExtrato() {
     let extrato = 'Extrato de Gastos:\n\n';
     const receita = parseFloat(document.getElementById('receita').value) || 0;
 
-    // Adicionando valor recebido no extrato
-    extrato += 'Valor Recebido: ' + receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '\n\n';
+    // Adicionando valor recebido no extrato (sem formatação)
+    extrato += 'Valor Recebido: ' + receita.toFixed(2) + '\n\n';  // Mantendo o valor numérico, mas com 2 casas decimais
     extrato += 'Gastos:\n';
 
-    // Adicionando os gastos no extrato
+    // Adicionando os gastos no extrato (sem formatação)
     gastos.forEach(gasto => {
-        extrato += gasto.nome.value + ': ' + parseFloat(gasto.valor.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '\n';
+        extrato += gasto.nome.value + ': ' + parseFloat(gasto.valor.value).toFixed(2) + '\n';  // Mantendo o valor numérico
     });
 
     // Calculando a sobra novamente
     const totalGastos = gastos.reduce((total, gasto) => total + (parseFloat(gasto.valor.value) || 0), 0);
     const sobra = receita - totalGastos;
 
-    // Adicionando a sobra no extrato
-    extrato += '\nSobra no Final: ' + sobra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    // Adicionando a sobra no extrato (sem formatação)
+    extrato += '\nSobra no Final: ' + sobra.toFixed(2); // Mantendo o valor numérico, mas com 2 casas decimais
 
     // Criando um Blob com o conteúdo do extrato
     const blob = new Blob([extrato], { type: 'text/plain' });
